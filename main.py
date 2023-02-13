@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import time
 
-net = cv2.dnn.readNet("model2/yolov4-obj_last.weights", "model2/yolov4-obj.cfg")
+net = cv2.dnn.readNet("model/yolov4-obj_last.weights", "model/yolov4-obj.cfg")
 model = cv2.dnn_DetectionModel(net)
 model.setInputParams(scale= 1 / 255, size=(410, 410), swapRB=True)
 model.setInputScale(1.0/ 127.5)
@@ -13,7 +13,7 @@ width, height = 720, 480
 
 
 classes = []
-with open("model2/classes.txt", "r") as file_object:
+with open("model/classes.txt", "r") as file_object:
 	for class_name in file_object.readlines():
 		class_name = class_name.strip()
 		classes.append(class_name)
@@ -23,7 +23,7 @@ thresh = 0.6
 nms_threshold = 0.4
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
-fileName = "C:/Users/PC/Desktop/Programlama/Projeler/YapayZeka/Drone/ds/ds.avi"
+fileName = "C:/Users/PC/Desktop/ds/ds.avi"
 codec = cv2.VideoWriter_fourcc('W', 'M', 'V', '2')
 frameRate = 30
 resolution = (width, height)
@@ -80,13 +80,13 @@ while True:
 			x,y,w,h = box[0],box[1],box[2],box[3]
 			text2 = (classes[class_ids[i][0]-1].upper() + " " + str(int(score[0] * 100)) + "%")
 			if (score[0] * 100 >= 99.5):
-				print("Average Correctness %:100")
+				print("Accuracy rate %:100")
 				text2 = (classes[class_ids[i][0]-1].upper() + " 100%")
 			elif (score[0] * 100 == 84.5):
 				print("Average Correctness %:85")
 				text2 = (classes[class_ids[i][0]-1].upper() + " 85%")
 			else:
-				print("Average Correctness %:", score[0] * 100)
+				print("Accuracy rate %:", score[0] * 100)
 			
 			
 			x1, y1 = x + w, y + h

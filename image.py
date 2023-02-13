@@ -1,6 +1,6 @@
 import cv2
 
-img = cv2.imread('images/ucanucak5.jpg')
+img = cv2.imread('images/uav_in_air5.jpg')
 
 with open('model2/classes.txt', 'r') as f:
     classes = f.read().splitlines()
